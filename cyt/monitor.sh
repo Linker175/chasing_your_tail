@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # no color
 numprocesses=$(ps aux | grep -i 'kismet' | wc -l)
-#echo $numprocesses
+echo $numprocesses
 if [[ $numprocesses > 2 ]] ; then 
 		echo -e "${GREEN}kismet up${NC}"
 	else

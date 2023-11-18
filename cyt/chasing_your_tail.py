@@ -30,7 +30,7 @@ cyt_log = open(log_file_name,"w", buffering=1)
 non_alert_ssid_list = []
 try:
 	from ignore_list_ssid import *
-	#print (ignore_list)
+	print (ignore_list)
 except:
 	pass
 	
