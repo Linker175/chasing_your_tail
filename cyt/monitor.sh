@@ -22,3 +22,5 @@ else
 fi 
 sleep 10;
 done
+
+read -p "Press Enter to exit"
