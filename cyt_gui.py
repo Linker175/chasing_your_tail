@@ -7,14 +7,11 @@ import subprocess
 def write_slogan():
     print("Checking Status")
     #Change lxterminal to gnome-terminal, xterm etc as needed
-    subprocess.call(["lxterminal", "-e" , "/home/blackhat/chasing_your_tail/cyt/monitor.sh"]) 
-    
-    
+    subprocess.Popen(["lxterminal", "-e" , "/home/blackhat/chasing_your_tail/cyt/monitor.sh"]) 
     
 def func_delete_ignore():
     print("Deleting Ignore Lists")
     subprocess.call(["lxterminal", "-e" , "/home/blackhat/chasing_your_tail/cyt/delete_ignore_lists.sh"])
-    
     
 def func_create_ignore():
     print("Creating Ignore Lists")
