@@ -15,16 +15,6 @@ app = FastAPI()
 #Endpoint for Whitelist 
 router_whitelist = APIRouter(tags=["Whitelist"])
 
-# @router_whitelist.get("/whitelist/isWhiteListEmpty/", response_model=schema.Empty)
-# def listDevices(
-#     db: Session = Depends(db.get_db)
-# ):
-#     data = crud.getWhitelist(db=db)
-#     if len(data) == 0:
-#         return {"empty": True}
-#     return {"empty": False}
-
-
 @router_whitelist.get("/whitelist/getWhitelist/", response_model=schema.Device)
 def listDevices(
     db: Session = Depends(db.get_db)
