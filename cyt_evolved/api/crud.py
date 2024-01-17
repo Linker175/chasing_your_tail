@@ -72,27 +72,27 @@ def getActuallyDetectedDevices(db):
         (database.TimePresence.twenty_and_more != False)
     ).all()
 
-def get0To5DetectedDevices(db):
+def get_0To5DetectedDevices(db):
     return db.query(database.TimePresence).filter(
         (database.TimePresence.zero_to_five != False)
     ).all()
 
-def get5To10DetectedDevices(db):
+def get_5To10DetectedDevices(db):
     return db.query(database.TimePresence).filter(
         (database.TimePresence.five_to_ten != False)
     ).all()
 
-def get10To15DetectedDevices(db):
+def get_10To15DetectedDevices(db):
     return db.query(database.TimePresence).filter(
         (database.TimePresence.ten_to_fifteen != False)
     ).all()
 
-def get15To20DetectedDevices(db):
+def get_15To20DetectedDevices(db):
     return db.query(database.TimePresence).filter(
         (database.TimePresence.fifteen_to_twenty != False)
     ).all()
 
-def get20AndMoreDetectedDevices(db):
+def get_20AndMoreDetectedDevices(db):
     return db.query(database.TimePresence).filter(
         (database.TimePresence.twenty_and_more != False)
     ).all()

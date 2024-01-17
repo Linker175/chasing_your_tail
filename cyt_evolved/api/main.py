@@ -5,12 +5,33 @@ from typing import Annotated
 import db as db
 import schema as schema
 import crud as crud
+import subprocess
 
 from fastapi import FastAPI, APIRouter
 
 db.Base.metadata.create_all(bind=db.engine)
 
 app = FastAPI()
+
+#Endpoint for Scan
+router_scan = APIRouter(tags=["Scan"])
+
+
+@router_scan.get("/scan/launch/", response_model=schema.Scan)
+def launchScan(
+):  
+    path_to_scan = "../database/first_fill_database.py"
+    try:
+        subprocess.run(["python", path_to_scan])
+    except Exception as e:
+        print(str(e))
+        return {"scanLaunchSuccess":False}
+    return {"scanLaunchSuccess":True}
+
+
+app.include_router(router_scan)
+
+
 
 #Endpoint for Whitelist 
 router_whitelist = APIRouter(tags=["Whitelist"])
@@ -28,41 +49,41 @@ def addADevice(
     db: Session = Depends(db.get_db)
 ):
     if not crud.addADevice(db=db, mac_address=payload.macAddress):
-            return {"uploadSucess": False}
-    return {"uploadSucess": True}
+            return {"uploadSuccess": False}
+    return {"uploadSuccess": True}
 
 @router_whitelist.post("/whitelist/addDetectedDevices/", response_model=schema.Upload)
 def addDetectedDevices(
     db: Session = Depends(db.get_db)
 ):
     if not crud.addDetectedDevice(db=db):
-            return {"uploadSucess": False}
-    return {"uploadSucess": True}
+            return {"uploadSuccess": False}
+    return {"uploadSuccess": True}
 
 @router_whitelist.post("/whitelist/addActuallyDetectedDevices/", response_model=schema.Upload)
 def addActuallyDetectedDevices(
     db: Session = Depends(db.get_db)
 ):
     if not crud.addActuallyDetectedDevice(db=db):
-            return {"uploadSucess": False}
-    return {"uploadSucess": True}
+            return {"uploadSuccess": False}
+    return {"uploadSuccess": True}
 
 @router_whitelist.post("/whitelist/deleteADevice/", response_model=schema.Delete)
-def deleteADevice(
+def deleteADevice( 
     payload: schema.MacAddress,
     db: Session = Depends(db.get_db)
 ):
     if not crud.deleteADevice(db=db, mac_address=payload.macAddress):
-            return {"deleteSucess": False}
-    return {"deleteSucess": True}
+            return {"deleteSuccess": False}
+    return {"deleteSuccess": True}
 
 @router_whitelist.post("/whitelist/deleteAllDevices/", response_model=schema.Delete)
 def deleteAllDevices(
     db: Session = Depends(db.get_db)
 ):
     if not crud.deleteAllDevices(db=db):
-            return {"deleteSucess": False}
-    return {"deleteSucess": True}
+            return {"deleteSuccess": False}
+    return {"deleteSuccess": True}
 
 app.include_router(router_whitelist)
 
@@ -110,7 +131,7 @@ def getActuallyDetectedDevices(
 def get0To5DetectedDevices(
     db: Session = Depends(db.get_db)
 ):
-    data = crud.get0To5DetectedDevices(db=db)
+    data = crud.get_0To5DetectedDevices(db=db)
     data_whitelisted = crud.getWhitelist(db=db) 
     if len(data_whitelisted) == 0:
         return schema.Device(macAddresses={entry.id: entry.mac_address for entry in data})
@@ -130,7 +151,7 @@ app.include_router(router_devices)
 def get5To10DetectedDevices(
     db: Session = Depends(db.get_db)
 ):
-    data = crud.get5To10DetectedDevices(db=db)
+    data = crud.get_5To10DetectedDevices(db=db)
     data_whitelisted = crud.getWhitelist(db=db) 
     if len(data_whitelisted) == 0:
         return schema.Device(macAddresses={entry.id: entry.mac_address for entry in data})
@@ -148,7 +169,7 @@ def get5To10DetectedDevices(
 def get10To15DetectedDevices(
     db: Session = Depends(db.get_db)
 ):
-    data = crud.get10To15DetectedDevices(db=db)
+    data = crud.get_10To15DetectedDevices(db=db)
     data_whitelisted = crud.getWhitelist(db=db) 
     if len(data_whitelisted) == 0:
         return schema.Device(macAddresses={entry.id: entry.mac_address for entry in data})
@@ -168,7 +189,7 @@ app.include_router(router_devices)
 def get15To20DetectedDevices(
     db: Session = Depends(db.get_db)
 ):
-    data = crud.get15To20DetectedDevices(db=db)
+    data = crud.get_15To20DetectedDevices(db=db)
     data_whitelisted = crud.getWhitelist(db=db) 
     if len(data_whitelisted) == 0:
         return schema.Device(macAddresses={entry.id: entry.mac_address for entry in data})
@@ -188,7 +209,7 @@ app.include_router(router_devices)
 def get20AndMoreDetectedDevices(
     db: Session = Depends(db.get_db)
 ):
-    data = crud.get20AndMoreDetectedDevices(db=db)
+    data = crud.get_20AndMoreDetectedDevices(db=db)
     data_whitelisted = crud.getWhitelist(db=db) 
     if len(data_whitelisted) == 0:
         return schema.Device(macAddresses={entry.id: entry.mac_address for entry in data})
@@ -201,7 +222,5 @@ def get20AndMoreDetectedDevices(
         if pass_this_round == 0:
             macAddresses.update({entry.id: entry.mac_address})
     return schema.Device(macAddresses=macAddresses)
-
-app.include_router(router_devices)
 
 app.include_router(router_devices)

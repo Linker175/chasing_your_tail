@@ -1,11 +1,14 @@
 from pydantic import BaseModel, Field, validator
 import re
 
+class Scan(BaseModel):
+    scanLaunchSuccess:bool
+
 class Upload(BaseModel):
-    uploadSucess: bool      
+    uploadSuccess: bool      
 
 class Delete(BaseModel):
-    deleteSucess: bool   
+    deleteSuccess: bool   
 
 class Empty(BaseModel):
     empty: bool
