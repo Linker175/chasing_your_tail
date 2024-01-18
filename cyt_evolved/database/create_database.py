@@ -3,7 +3,7 @@ import sqlite3
 # Fonction pour créer la base de données et les tables
 def create_database_and_tables():
     # Connexion à la base de données (elle sera créée si elle n'existe pas encore)
-    conn = sqlite3.connect("cyt.db")
+    conn = sqlite3.connect("../database/cyt.db")
 
     # Création d'un curseur pour exécuter des commandes SQL
     cursor = conn.cursor()

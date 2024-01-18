@@ -23,7 +23,7 @@ subprocess.run(["python", path_to_create_db])
 
 
 #Use the DB file
-con_cyt = sqlite3.connect('cyt.db') 
+con_cyt = sqlite3.connect('../database/cyt.db') 
 cursor_cyt = con_cyt.cursor()
 
 #Store the actual time into a file
