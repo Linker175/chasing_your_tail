@@ -6,7 +6,7 @@ import subprocess
 
 
 #Path to kismet db file (taking the last one)
-db_path = '../kismet_logs/*.kismet'
+db_path = '../../kismet_logs/*.kismet'
 list_of_files = glob.glob(db_path)
 latest_file = max(list_of_files, key=os.path.getctime)
 con_kismet = sqlite3.connect(latest_file)
