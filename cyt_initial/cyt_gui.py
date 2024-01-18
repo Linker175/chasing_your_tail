@@ -4,19 +4,19 @@ import subprocess
 def write_slogan():
     print("Checking Status")
     #Change lxterminal to gnome-terminal, xterm etc as needed
-    subprocess.Popen(["lxterminal", "-e" , "/home/blackhat/chasing_your_tail/cyt/monitor.sh"]) 
+    subprocess.Popen(["lxterminal", "-e" , "/home/pi/Desktop/chasing_your_tail/cyt_initial/cyt/monitor.sh"]) 
     
 def func_delete_ignore():
     print("Deleting Ignore Lists")
-    subprocess.call(["lxterminal", "-e" , "/home/blackhat/chasing_your_tail/cyt/delete_ignore_lists.sh"])
+    subprocess.call(["lxterminal", "-e" , "/home/pi/Desktop/chasing_your_tail/cyt_initial/cyt/delete_ignore_lists.sh"])
     
 def func_create_ignore():
     print("Creating Ignore Lists")
-    subprocess.call(["lxterminal", "-e" , "python3", "/home/blackhat/chasing_your_tail/cyt/create_ignore_list.py"])
+    subprocess.call(["lxterminal", "-e" , "python3", "/home/pi/Desktop/chasing_your_tail/cyt_initial/cyt/create_ignore_list.py"])
     
 def func_run_cyt():
     print("Running CYT")
-    subprocess.call(["lxterminal", "-e" , "python3", "/home/blackhat/chasing_your_tail/cyt/chasing_your_tail.py"])
+    subprocess.call(["lxterminal", "-e" , "python3", "/home/pi/Desktop/chasing_your_tail/cyt_initial/cyt/chasing_your_tail.py"])
 
 root = tk.Tk()
 root.title('Chasing Your Tail Viewer')
