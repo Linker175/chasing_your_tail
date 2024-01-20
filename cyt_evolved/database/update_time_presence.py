@@ -20,8 +20,8 @@ cursor_cyt.execute('SELECT mac_address, first_time_since_cyt_launched, last_time
 
 for row in cursor_cyt.fetchall():
     mac_address, first_time_since_cyt_launched, last_time_since_cyt_launched, zero_to_five, five_to_ten,ten_to_fifteen, fifteen_to_twenty, twenty_and_more  = row
-    first_time_since_cyt_launched = int(first_time_since_cyt_launched)
-    last_time_since_cyt_launched = int(last_time_since_cyt_launched)
+    print(first_time_since_cyt_launched)
+    print(last_time_since_cyt_launched)
     if ((zero_to_five == False) and (five_to_ten == False) and (ten_to_fifteen == False) and (fifteen_to_twenty == False) and (twenty_and_more == False) and (difference_between_now_and_given_epoch(last_time_since_cyt_launched))<5):
         first_time_since_cyt_launched = last_time_since_cyt_launched
         zero_to_five = True
