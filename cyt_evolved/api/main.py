@@ -22,8 +22,8 @@ def launchScan(
 ):  
     path_to_scan = "../database/first_fill_database.py"
     try:
-        subprocess.run(["python", path_to_scan])
         db.close_all_sessions()
+        subprocess.run(["python", path_to_scan])
     except Exception as e:
         print(str(e))
         return {"scanLaunchSuccess":False}
