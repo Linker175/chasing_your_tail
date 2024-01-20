@@ -3,13 +3,11 @@ import datetime
 
 def difference_between_now_and_given_epoch(epoch_timestamp):
     now = int((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds())-3600
-    gap = now - epoch_timestamp
-    seconds = gap.total_seconds()
+    seconds = abs(now - epoch_timestamp)
     return seconds/60
 
 def difference_between_two_epoch(epoch_one, epoch_two):
-    gap = abs(epoch_one - epoch_two)
-    seconds = gap.total_seconds()
+    seconds = abs(epoch_one - epoch_two)
     return seconds/60
 
 ## ATTENTION IL PEUT Y AVOIR DES ERREUR AVEC LES FUSEAUX HORAIRES à vérifier
