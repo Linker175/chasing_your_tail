@@ -106,7 +106,6 @@ def getDetectedDevices(
                 pass_this_round = 1
         if pass_this_round == 0:
             macAddresses.update({entry.id: entry.mac_address})
-
     return schema.Device(macAddresses=macAddresses)
 
 @router_devices.get("/devices/getActuallyDetectedDevices/", response_model=schema.Device)

@@ -22,7 +22,7 @@ timestamp_file_storage = "../database/timestamp_storage"
 with open(timestamp_file_storage, "r") as file:
     content = file.read()
 
-timestamp = int(content) #To adapt if there is a timezone difference
+timestamp = int(content) 
 print("timestamp="+str(timestamp))
 
 # Itération sur chaque ligne de résultat
