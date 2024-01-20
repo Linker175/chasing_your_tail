@@ -23,15 +23,16 @@ with open(timestamp_file_storage, "r") as file:
     content = file.read()
 
 timestamp = int(content)
-
+print("timestamp="+str(timestamp))
 
 # Itération sur chaque ligne de résultat
 for row in cursor_kismet.fetchall():
     last_time, devkey, devmac, dev_type = row
-    
+    print("lastime"+str(last_time))
+    print("devmac"+str(devmac))
     if timestamp < last_time:
         # Vérifier si devmac est déjà présent dans la table 'time_presence' de 'cyt'
-        cursor_cyt.execute('SELECT COUNT(*) FROM time_presence WHERE mac_address = ?', (devmac,))
+        cursor_cyt.execute('SELECT COUNT(*) FROM time_presence WHERE mac_address = ?', (devmac))
         if cursor_cyt.fetchone()[0] > 0:
             # Mise à jour de 'last_time_since_cyt_launched' si devmac est trouvé
             cursor_cyt.execute('UPDATE time_presence SET last_time_since_cyt_launched = ? WHERE mac_address = ?', (last_time, devmac))
