@@ -4,6 +4,7 @@ import sqlite3
 
 # Chemin vers les fichiers de la base de données Kismet
 db_path = '~/Desktop/chasing_your_tail/kismet_logs/*.kismet'
+db_path = os.path.expanduser(db_path)
 list_of_files = glob.glob(db_path)
 latest_file = max(list_of_files, key=os.path.getctime)
 con_kismet = sqlite3.connect(latest_file)
