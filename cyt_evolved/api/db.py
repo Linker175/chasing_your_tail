@@ -47,4 +47,4 @@ def get_db():
 
 def close_all_sessions():
     SessionLocal.close_all()
-
+    engine.dispose()
