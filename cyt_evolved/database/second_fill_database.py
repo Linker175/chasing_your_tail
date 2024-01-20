@@ -37,7 +37,7 @@ for row in cursor_kismet.fetchall():
             cursor_cyt.execute('UPDATE time_presence SET last_time_since_cyt_launched = ? WHERE mac_address = ?', (last_time, devmac))
         else:
             # Insertion des données si devmac n'est pas trouvé
-            cursor_cyt.execute('INSERT INTO time_presence (first_time_since_cyt_launched, mac_address) VALUES (?, ?)', (last_time, devmac))
+            cursor_cyt.execute('INSERT INTO time_presence (first_time_since_cyt_launched, last_time_since_cyt_launched, mac_address) VALUES (?, ?)', (last_time, last_time, devmac))
             cursor_cyt.execute('INSERT INTO devices (device_key, type_of_connection, mac_address) VALUES (?, ?, ?)', (devkey, dev_type, devmac))
             
 # Validation des modifications
