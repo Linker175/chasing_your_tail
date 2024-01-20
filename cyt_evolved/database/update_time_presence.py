@@ -3,7 +3,7 @@ from datetime import datetime
 
 def difference_between_now_and_given_epoch(epoch_timestamp):
     datetime_obj = datetime.utcfromtimestamp(epoch_timestamp)
-    now = datetime.now()
+    now = datetime.now()-3600
     gap = now - datetime_obj
     seconds = gap.total_seconds()
     return seconds/60
