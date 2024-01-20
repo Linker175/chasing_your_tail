@@ -1,13 +1,18 @@
 import sqlite3
-import datetime
+from datetime import datetime
 
 def difference_between_now_and_given_epoch(epoch_timestamp):
-    now = int((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds())-3600
-    seconds = abs(now - epoch_timestamp)
+    datetime_obj = datetime.utcfromtimestamp(epoch_timestamp)
+    now = datetime.now()
+    gap = now - datetime_obj
+    seconds = gap.total_seconds()
     return seconds/60
 
 def difference_between_two_epoch(epoch_one, epoch_two):
-    seconds = abs(epoch_one - epoch_two)
+    datetime_obj = datetime.utcfromtimestamp(epoch_one)
+    datetime_obj2 = datetime.utcfromtimestamp(epoch_two)
+    gap = datetime_obj - datetime_obj2
+    seconds = gap.total_seconds()
     return seconds/60
 
 ## ATTENTION IL PEUT Y AVOIR DES ERREUR AVEC LES FUSEAUX HORAIRES à vérifier
@@ -20,8 +25,6 @@ cursor_cyt.execute('SELECT mac_address, first_time_since_cyt_launched, last_time
 
 for row in cursor_cyt.fetchall():
     mac_address, first_time_since_cyt_launched, last_time_since_cyt_launched, zero_to_five, five_to_ten,ten_to_fifteen, fifteen_to_twenty, twenty_and_more  = row
-    print(first_time_since_cyt_launched)
-    print(last_time_since_cyt_launched)
     if ((zero_to_five == False) and (five_to_ten == False) and (ten_to_fifteen == False) and (fifteen_to_twenty == False) and (twenty_and_more == False) and (difference_between_now_and_given_epoch(last_time_since_cyt_launched))<5):
         first_time_since_cyt_launched = last_time_since_cyt_launched
         zero_to_five = True
