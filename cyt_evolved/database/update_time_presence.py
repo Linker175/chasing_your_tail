@@ -1,18 +1,13 @@
 import sqlite3
-from datetime import datetime
+import datetime
 
 def difference_between_now_and_given_epoch(epoch_timestamp):
-    datetime_obj = datetime.utcfromtimestamp(epoch_timestamp)
-    now = datetime.now()-3600
-    gap = now - datetime_obj
-    seconds = gap.total_seconds()
+    now = int((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_seconds())-3600
+    seconds = abs(now - epoch_timestamp)
     return seconds/60
 
 def difference_between_two_epoch(epoch_one, epoch_two):
-    datetime_obj = datetime.utcfromtimestamp(epoch_one)
-    datetime_obj2 = datetime.utcfromtimestamp(epoch_two)
-    gap = datetime_obj - datetime_obj2
-    seconds = gap.total_seconds()
+    seconds = abs(epoch_one - epoch_two)
     return seconds/60
 
 ## ATTENTION IL PEUT Y AVOIR DES ERREUR AVEC LES FUSEAUX HORAIRES à vérifier
