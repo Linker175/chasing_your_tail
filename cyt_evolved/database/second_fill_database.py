@@ -3,21 +3,21 @@ import os
 import sqlite3
 
 # Chemin vers les fichiers de la base de données Kismet
-db_path = '*.kismet'
+db_path = '../../kismet_logs/*.kismet'
 list_of_files = glob.glob(db_path)
 latest_file = max(list_of_files, key=os.path.getctime)
 con_kismet = sqlite3.connect(latest_file)
 cursor_kismet = con_kismet.cursor()
 
 # Connexion à la base de données 'cyt'
-con_cyt = sqlite3.connect('cyt.db')
+con_cyt = sqlite3.connect('../database/cyt.db')
 cursor_cyt = con_cyt.cursor()
 
 # Requête pour obtenir les données nécessaires de la table 'devices'
 cursor_kismet.execute('SELECT last_time, devkey, devmac, type FROM devices')
 
 #We get back timestamp
-timestamp_file_storage = "timestamp_storage"
+timestamp_file_storage = "../database/timestamp_storage"
 
 with open(timestamp_file_storage, "r") as file:
     content = file.read()
