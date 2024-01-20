@@ -31,7 +31,7 @@ timestamp = int((datetime.datetime.now() - datetime.datetime(1970, 1, 1)).total_
 time_storage_file = "../database/timestamp_storage"
 
 with open(time_storage_file, "w") as file:
-    file.write(str(timestamp-3300))   # -3600 To adapt if there is a timezone difference, -5 minutes to get devices present in the past five minutes
+    file.write(str(timestamp-3900))   # -3600 To adapt if there is a timezone difference, -5 minutes to get devices present in the past five minutes
 
 #Request to get the necessary data
 cursor_kismet.execute('SELECT last_time, devkey, devmac, type FROM devices')
