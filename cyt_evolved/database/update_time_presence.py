@@ -12,7 +12,7 @@ def difference_between_two_epoch(epoch_one, epoch_two):
 
 ## ATTENTION IL PEUT Y AVOIR DES ERREUR AVEC LES FUSEAUX HORAIRES à vérifier
 
-con_cyt = sqlite3.connect('~/Desktop/chasing_your_tail/cyt_evolved/database/cyt.db')
+con_cyt = sqlite3.connect('/home/pi/Desktop/chasing_your_tail/cyt_evolved/database/cyt.db')
 cursor_cyt = con_cyt.cursor()
 
 cursor_cyt.execute('SELECT mac_address, first_time_since_cyt_launched, last_time_since_cyt_launched, zero_to_five, five_to_ten,ten_to_fifteen, fifteen_to_twenty, twenty_and_more type FROM time_presence')

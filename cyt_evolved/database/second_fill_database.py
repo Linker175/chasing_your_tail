@@ -3,7 +3,7 @@ import os
 import sqlite3
 
 # Chemin vers les fichiers de la base de données Kismet
-db_path = '~/Desktop/chasing_your_tail/kismet_logs/*.kismet'
+db_path = '/home/pi/Desktop/chasing_your_tail/kismet_logs/*.kismet'
 db_path = os.path.expanduser(db_path)
 list_of_files = glob.glob(db_path)
 latest_file = max(list_of_files, key=os.path.getctime)
@@ -11,14 +11,14 @@ con_kismet = sqlite3.connect(latest_file)
 cursor_kismet = con_kismet.cursor()
 
 # Connexion à la base de données 'cyt'
-con_cyt = sqlite3.connect('~/Desktop/chasing_your_tail/cyt_evolved/database/cyt.db')
+con_cyt = sqlite3.connect('/home/pi/Desktop/chasing_your_tail/cyt_evolved/database/cyt.db')
 cursor_cyt = con_cyt.cursor()
 
 # Requête pour obtenir les données nécessaires de la table 'devices'
 cursor_kismet.execute('SELECT last_time, devkey, devmac, type FROM devices')
 
 #We get back timestamp
-timestamp_file_storage = "~/Desktop/chasing_your_tail/cyt_evolved/database/timestamp_storage"
+timestamp_file_storage = "/home/pi/Desktop/chasing_your_tail/cyt_evolved/database/timestamp_storage"
 
 with open(timestamp_file_storage, "r") as file:
     content = file.read()
