@@ -45,3 +45,6 @@ def get_db():
     finally:
         db.close()  
 
+def close_all_sessions():
+    SessionLocal.close_all()
+
