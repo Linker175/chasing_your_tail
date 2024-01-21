@@ -28,8 +28,7 @@ timestamp = int(content)
 # Itération sur chaque ligne de résultat
 for row in cursor_kismet.fetchall():
     last_time, devkey, devmac, dev_type = row
-    print(str(last_time>timestamp))
-    print(str(last_time-timestamp))
+
     if timestamp < last_time:
         # Vérifier si devmac est déjà présent dans la table 'time_presence' de 'cyt'
         cursor_cyt.execute('SELECT COUNT(*) FROM time_presence WHERE mac_address = ?', (devmac, ))
